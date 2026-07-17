@@ -1,0 +1,76 @@
+name: Production
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build MERN app
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      NODE_ENV: production
+      PORT: 5174
+      CLIENT_ORIGIN: ${{ vars.CLIENT_ORIGIN || 'https://br.theairportlimo.com' }}
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      SUBMISSIONS_TOKEN: ${{ secrets.SUBMISSIONS_TOKEN }}
+      SUBMISSIONS_DEFAULT_LIMIT: ${{ vars.SUBMISSIONS_DEFAULT_LIMIT || '25' }}
+      SUBMISSIONS_MAX_LIMIT: ${{ vars.SUBMISSIONS_MAX_LIMIT || '100' }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT || '587' }}
+      SMTP_SECURE: ${{ secrets.SMTP_SECURE || 'false' }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      MAIL_FROM: ${{ secrets.MAIL_FROM || 'BlinkRide <no-reply@br.theairportlimo.com>' }}
+      MAIL_TO: ${{ secrets.MAIL_TO }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            client/package-lock.json
+            server/package-lock.json
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install client dependencies
+        run: npm --prefix client ci
+
+      - name: Install server dependencies
+        run: npm --prefix server ci
+
+      - name: Verify production environment
+        if: github.event_name != 'pull_request'
+        run: |
+          node -e "const required=['MONGODB_URI','SUBMISSIONS_TOKEN','SMTP_HOST','SMTP_USER','SMTP_PASS','MAIL_TO']; const missing=required.filter((key)=>!process.env[key]); if (missing.length) { console.error('Missing GitHub production secrets: ' + missing.join(', ')); process.exit(1); } console.log('Production environment variables are configured.');"
+
+      - name: Build client
+        run: npm run build
+
+      - name: Upload production build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blinkride-client-dist
+          path: client/dist
+          if-no-files-found: error

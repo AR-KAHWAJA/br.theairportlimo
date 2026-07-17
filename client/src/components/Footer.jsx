@@ -1,21 +1,23 @@
-import { ArrowRight, CarFront, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { contactInfo, navItems, services } from "../data/siteContent.js";
+
+const footerLogoSrc = "/assets/blinkride-logo.webp";
 
 export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <div className="brand footer-logo">
-            <span className="brand-mark">
-              <CarFront size={22} />
-            </span>
-            <span>
-              <strong>BlinkRide</strong>
-              <small>Trusted Mobility</small>
-            </span>
-          </div>
+          <Link className="footer-logo-link" to="/" aria-label="BlinkRide home">
+            <img
+              className="footer-brand-logo"
+              src={footerLogoSrc}
+              alt="BlinkRide"
+              loading="lazy"
+              decoding="async"
+            />
+          </Link>
           <p>
             Smart rides, fast delivery, airport transfers, and partner mobility programs built for
             safety, transparency, and dependable service.
@@ -66,7 +68,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} BlinkRide.</span>
+        <span>&copy; {new Date().getFullYear()} BlinkRide.</span>
       </div>
     </footer>
   );

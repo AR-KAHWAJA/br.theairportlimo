@@ -6,6 +6,7 @@ export default function Hero({
   title,
   text,
   image,
+  className = "",
   heroPosition,
   primaryLabel = "Get the App",
   primaryTo = "/get-the-app",
@@ -15,7 +16,7 @@ export default function Hero({
 }) {
   return (
     <section
-      className="hero"
+      className={["hero", className].filter(Boolean).join(" ")}
       style={{
         "--hero-image": `url(${image})`,
         "--hero-position": heroPosition

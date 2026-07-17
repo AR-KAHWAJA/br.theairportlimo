@@ -11,10 +11,12 @@ export default function Home() {
   return (
     <>
       <Hero
+        className="home-hero"
         eyebrow="Smart Rides. Fast Delivery. Trusted Mobility."
         title="Start your journey with BlinkRide"
         text="Book rides, schedule airport transfers, send packages, order food, or drive with a platform built around safety and reliability."
         image="/assets/generated-home-hero.webp"
+        heroPosition="58% center"
         primaryLabel="Get the App"
         primaryTo="/get-the-app"
         secondaryLabel="Book now"

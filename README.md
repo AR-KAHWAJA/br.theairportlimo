@@ -57,6 +57,8 @@ PORT=5174
 CLIENT_ORIGIN=https://br.theairportlimo.com
 MONGODB_URI=mongodb+srv://USER:PASSWORD@HOST/blinkride?retryWrites=true&w=majority
 SUBMISSIONS_TOKEN=replace-with-a-long-random-secret
+SUBMISSIONS_DEFAULT_LIMIT=25
+SUBMISSIONS_MAX_LIMIT=100
 SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_SECURE=false
@@ -72,6 +74,40 @@ MAIL_TO=support@blinkride.com
 Authorization: Bearer your-token
 ```
 
+The protected submissions endpoint supports pagination:
+
+```bash
+GET /api/submissions?page=1&limit=25
+GET /api/submissions?type=reservations&page=2&limit=10
+```
+
+## GitHub production environment
+
+This repo includes `.github/workflows/production.yml`. In GitHub, create an environment named
+`production` and add the values listed in `.github/PRODUCTION_ENV.md`.
+
+Use GitHub environment variables for non-secrets:
+
+```bash
+CLIENT_ORIGIN=https://br.theairportlimo.com
+SUBMISSIONS_DEFAULT_LIMIT=25
+SUBMISSIONS_MAX_LIMIT=100
+```
+
+Use GitHub environment secrets for private values:
+
+```bash
+MONGODB_URI
+SUBMISSIONS_TOKEN
+SMTP_HOST
+SMTP_PORT
+SMTP_SECURE
+SMTP_USER
+SMTP_PASS
+MAIL_FROM
+MAIL_TO
+```
+
 ## Environment
 
 Copy `server/.env.example` to `server/.env` or set these variables in your deployment platform:
@@ -81,6 +117,8 @@ PORT=5174
 CLIENT_ORIGIN=https://your-domain.com
 MONGODB_URI=mongodb+srv://...
 SUBMISSIONS_TOKEN=replace-with-a-long-random-secret
+SUBMISSIONS_DEFAULT_LIMIT=25
+SUBMISSIONS_MAX_LIMIT=100
 SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_SECURE=false

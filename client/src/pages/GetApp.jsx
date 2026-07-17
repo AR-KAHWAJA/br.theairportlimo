@@ -1,6 +1,6 @@
-import { ArrowRight, CarFront, Smartphone, UserRoundCheck } from "lucide-react";
+import { ArrowRight, CarFront, Smartphone } from "lucide-react";
+import { Link } from "react-router-dom";
 import Hero from "../components/Hero.jsx";
-import { AppLeadForm } from "../components/LeadForms.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 
 export default function GetApp() {
@@ -9,7 +9,7 @@ export default function GetApp() {
       <Hero
         eyebrow="Get the App"
         title="Ride smart. Drive better."
-        text="Use BlinkRide as a customer or driver. Capture app-interest leads now and attach live App Store / Play Store links when they are available."
+        text="Use BlinkRide as a customer or driver with simple access paths for rides, deliveries, airport trips, and driver opportunities."
         image="/assets/hero-app.webp"
         heroPosition="center calc(50% + 58px)"
         primaryLabel="Customer App"
@@ -22,7 +22,7 @@ export default function GetApp() {
         <SectionHeader
           eyebrow="Get the App"
           title="Ride or drive with BlinkRide anytime"
-          text="The original page included customer and driver app calls to action. This version turns those calls to action into useful lead forms."
+          text="Choose the customer app experience for bookings or the driver app path for earning with BlinkRide."
           align="center"
         />
         <div className="app-card-grid">
@@ -37,9 +37,9 @@ export default function GetApp() {
                 Book premium rides, track your driver in real time, manage reservations, and enjoy
                 a smooth travel experience.
               </p>
-              <a className="button ghost-dark" href="#app-interest">
+              <Link className="button ghost-dark" to="/contact">
                 Get the App <ArrowRight size={17} />
-              </a>
+              </Link>
             </div>
           </article>
 
@@ -54,29 +54,11 @@ export default function GetApp() {
                 Accept ride requests, manage trips, track earnings, and stay connected with
                 passengers through the BlinkRide Driver App.
               </p>
-              <a className="button ghost-dark" href="#app-interest">
+              <Link className="button ghost-dark" to="/contact">
                 Drive with BlinkRide <ArrowRight size={17} />
-              </a>
+              </Link>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section id="app-interest" className="page-section muted">
-        <div className="app-download-layout">
-          <div>
-            <p className="eyebrow">App Access</p>
-            <h2>Tell us which app you need</h2>
-            <p>
-              This MERN version can store customer and driver app-interest leads in MongoDB as soon
-              as your production connection string is configured.
-            </p>
-            <div className="mini-feature">
-              <UserRoundCheck size={20} />
-              <span>Customer and driver leads are separated by role.</span>
-            </div>
-          </div>
-          <AppLeadForm role="customer" />
         </div>
       </section>
     </>

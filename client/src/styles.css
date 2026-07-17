@@ -414,6 +414,12 @@ textarea {
     rgba(0, 0, 0, 0.12);
 }
 
+.home-hero .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.52) 42%, rgba(0, 0, 0, 0.1) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.24) 100%);
+}
+
 .hero-content {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
@@ -1080,12 +1086,19 @@ textarea {
   gap: 34px;
 }
 
-.footer-logo .brand-mark {
-  background: var(--amber);
-  color: var(--secondary);
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 18px;
 }
 
-.footer-logo small,
+.footer-brand-logo {
+  display: block;
+  width: clamp(150px, 14vw, 190px);
+  height: auto;
+}
+
 .footer-brand p {
   color: rgba(255, 255, 255, 0.64);
 }
@@ -1260,9 +1273,26 @@ textarea {
     min-height: 700px;
   }
 
+  .home-hero {
+    min-height: auto;
+    background-position: 66% center;
+  }
+
+  .home-hero .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.58) 42%, rgba(0, 0, 0, 0.72) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 100%);
+  }
+
   .hero-content {
     padding: 70px 0 34px;
     gap: 26px;
+  }
+
+  .home-hero .hero-content {
+    padding-top: 116px;
+    padding-bottom: 48px;
+    gap: 20px;
   }
 
   .hero-copy h1 {
@@ -1275,6 +1305,10 @@ textarea {
 
   .hero-actions {
     gap: 10px;
+  }
+
+  .home-hero .hero-actions {
+    margin-top: 22px;
   }
 
   .button {
@@ -1348,5 +1382,37 @@ textarea {
 
   .footer-bottom {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-hero {
+    background-position: 69% center;
+  }
+
+  .home-hero .hero-content {
+    width: min(100% - 20px, 1180px);
+    padding-top: 106px;
+    padding-bottom: 40px;
+    gap: 16px;
+  }
+
+  .home-hero .eyebrow {
+    padding: 8px 13px;
+    font-size: 0.78rem;
+  }
+
+  .home-hero .hero-copy h1 {
+    font-size: 2.08rem;
+    line-height: 1.04;
+  }
+
+  .home-hero .hero-copy p:not(.eyebrow) {
+    margin-top: 14px;
+    font-size: 0.94rem;
+  }
+
+  .home-hero .hero-actions {
+    margin-top: 18px;
   }
 }

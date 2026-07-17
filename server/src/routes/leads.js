@@ -137,6 +137,66 @@ async function notify(type, payload, record) {
   }
 }
 
+const submissionCollections = [
+  { key: "inquiries", model: Inquiry },
+  { key: "reservations", model: Reservation },
+  { key: "appInterests", model: AppInterest }
+];
+const submissionCollectionMap = new Map(submissionCollections.map((collection) => [collection.key, collection]));
+
+function readPositiveInt(value, fallback, max = Number.MAX_SAFE_INTEGER) {
+  const number = Number.parseInt(value, 10);
+
+  if (!Number.isFinite(number) || number < 1) {
+    return fallback;
+  }
+
+  return Math.min(number, max);
+}
+
+function getPagination(query) {
+  const maxLimit = readPositiveInt(process.env.SUBMISSIONS_MAX_LIMIT, 100, 500);
+  const defaultLimit = readPositiveInt(process.env.SUBMISSIONS_DEFAULT_LIMIT, 25, maxLimit);
+  const page = readPositiveInt(query.page, 1);
+  const limit = readPositiveInt(query.limit, defaultLimit, maxLimit);
+
+  return {
+    page,
+    limit,
+    skip: (page - 1) * limit
+  };
+}
+
+function paginationMeta({ page, limit }, total) {
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+
+  return {
+    page,
+    limit,
+    total,
+    totalPages,
+    hasNextPage: page < totalPages,
+    hasPreviousPage: page > 1
+  };
+}
+
+async function listSubmissionsPage({ key, model }, pagination) {
+  if (isMongoConnected()) {
+    const [items, total] = await Promise.all([
+      model.find({}).sort({ createdAt: -1 }).skip(pagination.skip).limit(pagination.limit).lean(),
+      model.countDocuments()
+    ]);
+
+    return { items, pagination: paginationMeta(pagination, total) };
+  }
+
+  const records = [...listMemory(key)].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  return {
+    items: records.slice(pagination.skip, pagination.skip + pagination.limit),
+    pagination: paginationMeta(pagination, records.length)
+  };
+}
+
 router.post("/inquiries", async (req, res, next) => {
   try {
     const payload = pick(req.body, ["fullName", "email", "phone", "inquiryType", "message"]);
@@ -210,13 +270,43 @@ router.post("/app-interest", async (req, res, next) => {
   }
 });
 
-router.get("/submissions", (_req, res) => {
-  res.json({
-    mongoConnected: isMongoConnected(),
-    inquiries: listMemory("inquiries"),
-    reservations: listMemory("reservations"),
-    appInterests: listMemory("appInterests")
-  });
+router.get("/submissions", async (req, res, next) => {
+  try {
+    const pagination = getPagination(req.query);
+    const type = typeof req.query.type === "string" ? req.query.type.trim() : "all";
+
+    if (type !== "all") {
+      const collection = submissionCollectionMap.get(type);
+
+      if (!collection) {
+        return res.status(400).json({
+          ok: false,
+          message: `type must be one of: all, ${submissionCollections.map((item) => item.key).join(", ")}.`
+        });
+      }
+
+      const result = await listSubmissionsPage(collection, pagination);
+      return res.json({
+        mongoConnected: isMongoConnected(),
+        type,
+        ...result
+      });
+    }
+
+    const entries = await Promise.all(
+      submissionCollections.map(async (collection) => [
+        collection.key,
+        await listSubmissionsPage(collection, pagination)
+      ])
+    );
+
+    return res.json({
+      mongoConnected: isMongoConnected(),
+      submissions: Object.fromEntries(entries)
+    });
+  } catch (error) {
+    return next(error);
+  }
 });
 
 export default router;
