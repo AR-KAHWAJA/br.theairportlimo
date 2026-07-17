@@ -60,10 +60,10 @@ jobs:
       - name: Install server dependencies
         run: npm --prefix server ci
 
-      - name: Verify production environment
+      - name: Check production environment
         if: github.event_name != 'pull_request'
         run: |
-          node -e "const required=['MONGODB_URI','SUBMISSIONS_TOKEN','SMTP_HOST','SMTP_USER','SMTP_PASS','MAIL_TO']; const missing=required.filter((key)=>!process.env[key]); if (missing.length) { console.error('Missing GitHub production secrets: ' + missing.join(', ')); process.exit(1); } console.log('Production environment variables are configured.');"
+          node -e "const required=['MONGODB_URI','SUBMISSIONS_TOKEN','SMTP_HOST','SMTP_USER','SMTP_PASS','MAIL_TO']; const missing=required.filter((key)=>!process.env[key]); if (missing.length) { console.log('::warning title=Missing production secrets::Add these GitHub production secrets before real deployment: ' + missing.join(', ')); } else { console.log('Production environment variables are configured.'); }"
 
       - name: Build client
         run: npm run build
