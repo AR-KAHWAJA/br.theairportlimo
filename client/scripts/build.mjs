@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { rollup, watch } from "rollup";
 import config from "../rollup.config.mjs";
@@ -11,6 +11,7 @@ async function prepareDist() {
   await rm(dist, { recursive: true, force: true });
   await mkdir(path.join(dist, "assets"), { recursive: true });
   await cp(path.join(root, "public"), dist, { recursive: true });
+  await removeUnusedPublicAssets(path.join(dist, "assets"));
   await cp(path.join(root, "src", "styles.css"), path.join(dist, "styles.css"));
 
   const buildId = Date.now();
@@ -19,6 +20,16 @@ async function prepareDist() {
     .replace('/src/main.jsx', `/assets/app.js?v=${buildId}`)
     .replace('/styles.css', `/styles.css?v=${buildId}`);
   await writeFile(path.join(dist, "index.html"), html);
+}
+
+async function removeUnusedPublicAssets(assetDir) {
+  const entries = await readdir(assetDir, { withFileTypes: true });
+
+  await Promise.all(
+    entries
+      .filter((entry) => entry.isFile() && (/\.jpe?g$/i.test(entry.name) || entry.name === "generated-home-hero.png"))
+      .map((entry) => rm(path.join(assetDir, entry.name), { force: true }))
+  );
 }
 
 async function buildOnce() {

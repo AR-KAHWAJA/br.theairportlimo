@@ -26,25 +26,25 @@ export const audiences = [
   {
     title: "Business",
     description: "Smart mobility for meetings, teams, airport transfers, and corporate travel.",
-    image: "/assets/generated-business-card.jpg",
+    image: "/assets/generated-business-card.webp",
     href: "/customers#corporate"
   },
   {
     title: "Family",
     description: "Safe rides for family, friends, kids, errands, and daily plans.",
-    image: "/assets/generated-family-card.jpg",
+    image: "/assets/generated-family-card.webp",
     href: "/customers#family"
   },
   {
     title: "Package",
     description: "Fast, reliable delivery with live status from pickup to drop-off.",
-    image: "/assets/generated-package-card.jpg",
+    image: "/assets/generated-package-card.webp",
     href: "/customers#deliveries"
   },
   {
     title: "Food",
     description: "Fresh meals and grocery delivery from favorite local restaurants and stores.",
-    image: "/assets/generated-food-card.jpg",
+    image: "/assets/generated-food-card.webp",
     href: "/customers#food"
   }
 ];
@@ -54,42 +54,42 @@ export const services = [
     title: "One-Way Trips",
     label: "One destination. Endless convenience.",
     description: "Convenient and reliable rides customized for everyday travel, meetings, shopping, errands, and visits.",
-    image: "/assets/generated-service-one-way.jpg",
+    image: "/assets/generated-service-one-way.webp",
     tags: ["Passengers", "Food", "Packages"]
   },
   {
     title: "Round Trips",
     label: "Comfortable rides with guaranteed return.",
     description: "Hassle-free transportation with planned pickups and returns for business, family, and personal travel.",
-    image: "/assets/generated-service-round-trip.jpg",
+    image: "/assets/generated-service-round-trip.webp",
     tags: ["Passengers", "Drivers"]
   },
   {
     title: "Hourly Trips",
     label: "Flexible ride options for busy schedules.",
     description: "Book by the hour for errands, meetings, appointments, multi-stop trips, and personalized travel.",
-    image: "/assets/generated-service-hourly.jpg",
+    image: "/assets/generated-service-hourly.webp",
     tags: ["Meetings", "Errands"]
   },
   {
     title: "Airport Pickups",
     label: "On-time transfers for every flight.",
     description: "Select economy, premium, or luxury options with reliable airport pickup and drop-off coordination.",
-    image: "/assets/generated-service-airport.jpg",
+    image: "/assets/generated-service-airport.webp",
     tags: ["Economy", "Premium", "Luxury"]
   },
   {
     title: "Package Delivery",
     label: "Secure handling and prompt delivery.",
     description: "Send and receive parcels with real-time tracking, careful handling, and dependable arrival times.",
-    image: "/assets/generated-service-package.jpg",
+    image: "/assets/generated-service-package.webp",
     tags: ["Secure", "Tracked"]
   },
   {
     title: "Food Delivery",
     label: "Fresh food from favorite restaurants.",
     description: "Order meals and groceries through a simple delivery flow with fast dispatch and live updates.",
-    image: "/assets/generated-service-food.jpg",
+    image: "/assets/generated-service-food.webp",
     tags: ["Meals", "Groceries"]
   }
 ];
@@ -129,7 +129,7 @@ export const customerSections = [
     title: "Safe journeys start here",
     description:
       "BlinkRide keeps trust at the center of every ride and delivery with driver verification, transparent pricing, live ride tracking, and secure communication.",
-    image: "/assets/generated-customer-safety.jpg",
+    image: "/assets/generated-customer-safety.webp",
     bullets: ["Strict driver verification", "Transparent pricing", "Live ride tracking", "Secure communication"]
   },
   {
@@ -174,7 +174,7 @@ export const customerSections = [
     title: "Food and Parcels in one app",
     description:
       "BlinkRide supports quick meal delivery and careful parcel delivery with dependable drivers, live status, and secure handling.",
-    image: "/assets/generated-customer-deliveries.jpg",
+    image: "/assets/generated-customer-deliveries.webp",
     bullets: ["Fresh food delivery", "Secure parcels", "Real-time status"]
   }
 ];

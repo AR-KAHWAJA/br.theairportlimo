@@ -14,7 +14,7 @@ export default function Home() {
         eyebrow="Smart Rides. Fast Delivery. Trusted Mobility."
         title="Start your journey with BlinkRide"
         text="Book rides, schedule airport transfers, send packages, order food, or drive with a platform built around safety and reliability."
-        image="/assets/generated-home-hero.jpg"
+        image="/assets/generated-home-hero.webp"
         primaryLabel="Get the App"
         primaryTo="/get-the-app"
         secondaryLabel="Book now"
@@ -77,7 +77,7 @@ export default function Home() {
           title: "Where safety leads",
           description:
             "Safety is non-negotiable. Verified drivers, live trip tracking, emergency support, and transparent updates help riders move with confidence.",
-          image: "/assets/generated-customer-safety.jpg",
+          image: "/assets/generated-customer-safety.webp",
           bullets: ["Verified drivers with background checks", "Real-time trip tracking", "Support when you need it"]
         }}
       />

@@ -6,6 +6,7 @@ export default function Hero({
   title,
   text,
   image,
+  heroPosition,
   primaryLabel = "Get the App",
   primaryTo = "/get-the-app",
   secondaryLabel,
@@ -13,7 +14,13 @@ export default function Hero({
   children
 }) {
   return (
-    <section className="hero" style={{ "--hero-image": `url(${image})` }}>
+    <section
+      className="hero"
+      style={{
+        "--hero-image": `url(${image})`,
+        "--hero-position": heroPosition
+      }}
+    >
       <div className="hero-overlay" />
       <div className="hero-content">
         <div className="hero-copy">

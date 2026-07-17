@@ -11,6 +11,7 @@ export default function GetApp() {
         title="Ride smart. Drive better."
         text="Use BlinkRide as a customer or driver. Capture app-interest leads now and attach live App Store / Play Store links when they are available."
         image="/assets/hero-app.webp"
+        heroPosition="center calc(50% + 58px)"
         primaryLabel="Customer App"
         primaryTo="#customer-app"
         secondaryLabel="Driver App"

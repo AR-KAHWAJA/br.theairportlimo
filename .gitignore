@@ -8,3 +8,5 @@ dist
 npm-debug.log*
 coverage
 client/public/assets/generated-home-hero.png
+client/public/assets/*.jpg
+.tools/
