@@ -29,10 +29,14 @@ export default function App() {
           <Route path="/drivers/" element={<Drivers />} />
           <Route path="/affiliates" element={<Affiliates />} />
           <Route path="/affiliates/" element={<Affiliates />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/about/" element={<About />} />
           <Route path="/about-us" element={<About />} />
           <Route path="/about-us/" element={<About />} />
           <Route path="/fleet" element={<Fleet />} />
           <Route path="/fleet/" element={<Fleet />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact/" element={<Contact />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/contact-us/" element={<Contact />} />
           <Route path="/contact-us-2" element={<Contact />} />

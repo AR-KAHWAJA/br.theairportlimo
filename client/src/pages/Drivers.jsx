@@ -42,7 +42,7 @@ export default function Drivers() {
             </p>
             <AppLeadForm role="driver" />
           </div>
-          <img src="/assets/driver-app.webp" alt="BlinkRide driver app screen" loading="lazy" decoding="async" />
+          <img src="/assets/app-driver.webp" alt="BlinkRide driver app screen" loading="lazy" decoding="async" />
         </div>
       </section>
     </>
