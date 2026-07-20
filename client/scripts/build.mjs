@@ -34,10 +34,7 @@ async function prepareDist() {
     .replace('/src/main.jsx', `${withBasePath("/assets/app.js")}?v=${buildId}`)
     .replace('/styles.css', `${withBasePath("/styles.css")}?v=${buildId}`)
     .replace('/assets/generated-home-hero.webp', withBasePath("/assets/generated-home-hero.webp"))
-    .replace(
-      '<script type="module"',
-      `<script>window.__BLINKRIDE_BASE_PATH__ = ${JSON.stringify(basePath)};</script>\n    <script type="module"`
-    );
+    .replace("</head>", `    <meta name="blinkride-base-path" content="${basePath}" />\n  </head>`);
   await writeFile(path.join(dist, "index.html"), html);
   await writeFile(path.join(dist, "404.html"), html);
 }

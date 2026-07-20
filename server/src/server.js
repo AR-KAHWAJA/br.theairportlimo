@@ -17,6 +17,11 @@ const app = express();
 const port = process.env.PORT || 5174;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const clientDist = path.resolve(__dirname, "../../client/dist");
+const staticBasePaths = new Set(
+  [process.env.PUBLIC_BASE_PATH, "/br.theairportlimo"]
+    .map((basePath) => normalizeBasePath(basePath || ""))
+    .filter((basePath) => basePath !== "/")
+);
 const defaultOrigins = ["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5174"];
 const allowedOrigins = new Set(
   [...defaultOrigins, ...(process.env.CLIENT_ORIGIN || "").split(",")]
@@ -35,6 +40,15 @@ const leadLimiter = createRateLimiter({
   max: 20,
   message: "Too many form submissions. Please wait a few minutes and try again."
 });
+
+function normalizeBasePath(value) {
+  const trimmed = value.trim();
+  if (!trimmed || trimmed === "/") {
+    return "/";
+  }
+
+  return `/${trimmed.replace(/^\/+|\/+$/g, "")}`;
+}
 
 function resolveCorsOrigin(origin, callback) {
   if (!origin || allowedOrigins.has(origin)) {
@@ -106,6 +120,9 @@ app.use("/api/submissions", requireSubmissionsToken);
 app.use("/api", leadRoutes);
 
 app.use(express.static(clientDist, { dotfiles: "ignore", etag: true, setHeaders: setStaticCacheHeaders }));
+for (const basePath of staticBasePaths) {
+  app.use(basePath, express.static(clientDist, { dotfiles: "ignore", etag: true, setHeaders: setStaticCacheHeaders }));
+}
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {
     res.setHeader("Cache-Control", "no-cache");
