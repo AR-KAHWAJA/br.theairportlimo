@@ -27,13 +27,13 @@ export const audiences = [
     title: "Business",
     description: "Smart mobility for meetings, teams, airport transfers, and corporate travel.",
     image: "/assets/generated-business-card.webp",
-    href: "/customers#corporate"
+    href: "/customers#passengers"
   },
   {
     title: "Family",
     description: "Safe rides for family, friends, kids, errands, and daily plans.",
     image: "/assets/generated-family-card.webp",
-    href: "/customers#family"
+    href: "/customers#round_customer"
   },
   {
     title: "Package",
@@ -45,7 +45,7 @@ export const audiences = [
     title: "Food",
     description: "Fresh meals and grocery delivery from favorite local restaurants and stores.",
     image: "/assets/generated-food-card.webp",
-    href: "/customers#food"
+    href: "/customers#deliveries"
   }
 ];
 
