@@ -28,8 +28,10 @@ SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=your-smtp-user
 SMTP_PASS=your-smtp-password
-MAIL_FROM=BlinkRide <no-reply@br.theairportlimo.com>
-MAIL_TO=support@blinkride.com
+MAIL_FROM=BlinkRide <email@br.theairportlimo.com>
+MAIL_TO=wpadmin@techhorizon.tech
+MAIL_CC=etech.afzaal@gmail.com
+MAIL_BCC=etech.abdulrehman@gmail.com
 ```
 
 Do not commit real `.env` files or secret values.

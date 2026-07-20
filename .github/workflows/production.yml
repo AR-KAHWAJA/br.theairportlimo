@@ -34,8 +34,10 @@ jobs:
       SMTP_SECURE: ${{ secrets.SMTP_SECURE || 'false' }}
       SMTP_USER: ${{ secrets.SMTP_USER }}
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
-      MAIL_FROM: ${{ secrets.MAIL_FROM || 'BlinkRide <no-reply@br.theairportlimo.com>' }}
-      MAIL_TO: ${{ secrets.MAIL_TO }}
+      MAIL_FROM: ${{ secrets.MAIL_FROM || 'BlinkRide <email@br.theairportlimo.com>' }}
+      MAIL_TO: ${{ secrets.MAIL_TO || 'wpadmin@techhorizon.tech' }}
+      MAIL_CC: ${{ secrets.MAIL_CC || 'etech.afzaal@gmail.com' }}
+      MAIL_BCC: ${{ secrets.MAIL_BCC || 'etech.abdulrehman@gmail.com' }}
 
     steps:
       - name: Checkout

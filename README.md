@@ -64,8 +64,10 @@ SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=your-smtp-user
 SMTP_PASS=your-smtp-password
-MAIL_FROM="BlinkRide <no-reply@br.theairportlimo.com>"
-MAIL_TO=support@blinkride.com
+MAIL_FROM="BlinkRide <email@br.theairportlimo.com>"
+MAIL_TO=wpadmin@techhorizon.tech
+MAIL_CC=etech.afzaal@gmail.com
+MAIL_BCC=etech.abdulrehman@gmail.com
 ```
 
 `/api/submissions` is disabled unless `SUBMISSIONS_TOKEN` is configured. Access it with:
@@ -106,6 +108,8 @@ SMTP_USER
 SMTP_PASS
 MAIL_FROM
 MAIL_TO
+MAIL_CC
+MAIL_BCC
 ```
 
 ## Environment
@@ -124,8 +128,10 @@ SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=your-smtp-user
 SMTP_PASS=your-smtp-password
-MAIL_FROM="BlinkRide <no-reply@your-domain.com>"
-MAIL_TO=support@blinkride.com
+MAIL_FROM="BlinkRide <email@br.theairportlimo.com>"
+MAIL_TO=wpadmin@techhorizon.tech
+MAIL_CC=etech.afzaal@gmail.com
+MAIL_BCC=etech.abdulrehman@gmail.com
 ```
 
 When SMTP variables are missing, submissions still work and the API response reports that email was skipped.

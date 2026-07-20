@@ -6,6 +6,11 @@ function isMailEnabled() {
   return Boolean(process.env.SMTP_HOST && process.env.MAIL_TO);
 }
 
+function optionalAddress(value) {
+  const address = value?.trim();
+  return address || undefined;
+}
+
 function getTransporter() {
   if (!transporter) {
     transporter = nodemailer.createTransport({
@@ -84,9 +89,14 @@ export async function sendLeadEmail(type, payload, record) {
 
   const message = buildEmail(type, payload, record);
   const info = await getTransporter().sendMail({
-    from: process.env.MAIL_FROM || process.env.SMTP_USER || "BlinkRide <no-reply@blinkride.local>",
-    to: process.env.MAIL_TO,
-    replyTo: payload.email || undefined,
+    from:
+      optionalAddress(process.env.MAIL_FROM) ||
+      optionalAddress(process.env.SMTP_USER) ||
+      "BlinkRide <no-reply@blinkride.local>",
+    to: optionalAddress(process.env.MAIL_TO),
+    cc: optionalAddress(process.env.MAIL_CC),
+    bcc: optionalAddress(process.env.MAIL_BCC),
+    replyTo: optionalAddress(payload.email),
     subject: message.subject,
     text: message.text,
     html: message.html

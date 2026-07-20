@@ -10,7 +10,7 @@ export const navItems = [
 ];
 
 export const contactInfo = {
-  email: "support@blinkride.com",
+  email: "email@br.theairportlimo.com",
   phone: "(987) 654-3210",
   address: "123 Transport Ave, Citytown, Countryland"
 };
