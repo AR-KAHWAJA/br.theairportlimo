@@ -29,15 +29,15 @@ jobs:
       SUBMISSIONS_TOKEN: ${{ secrets.SUBMISSIONS_TOKEN }}
       SUBMISSIONS_DEFAULT_LIMIT: ${{ vars.SUBMISSIONS_DEFAULT_LIMIT || '25' }}
       SUBMISSIONS_MAX_LIMIT: ${{ vars.SUBMISSIONS_MAX_LIMIT || '100' }}
-      SMTP_HOST: ${{ secrets.SMTP_HOST }}
-      SMTP_PORT: ${{ secrets.SMTP_PORT || '587' }}
-      SMTP_SECURE: ${{ secrets.SMTP_SECURE || 'false' }}
-      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST || vars.SMTP_HOST }}
+      SMTP_PORT: ${{ vars.SMTP_PORT || '587' }}
+      SMTP_SECURE: ${{ vars.SMTP_SECURE || 'false' }}
+      SMTP_USER: ${{ secrets.SMTP_USER || vars.SMTP_USER || 'email@br.theairportlimo.com' }}
       SMTP_PASS: ${{ secrets.SMTP_PASS }}
-      MAIL_FROM: ${{ secrets.MAIL_FROM || 'BlinkRide <email@br.theairportlimo.com>' }}
-      MAIL_TO: ${{ secrets.MAIL_TO || 'wpadmin@techhorizon.tech' }}
-      MAIL_CC: ${{ secrets.MAIL_CC || 'etech.afzaal@gmail.com' }}
-      MAIL_BCC: ${{ secrets.MAIL_BCC || 'etech.abdulrehman@gmail.com' }}
+      MAIL_FROM: ${{ vars.MAIL_FROM || 'BlinkRide <email@br.theairportlimo.com>' }}
+      MAIL_TO: ${{ vars.MAIL_TO || 'wpadmin@techhorizon.tech' }}
+      MAIL_CC: ${{ vars.MAIL_CC || 'etech.afzaal@gmail.com' }}
+      MAIL_BCC: ${{ vars.MAIL_BCC || 'etech.abdulrehman@gmail.com' }}
 
     steps:
       - name: Checkout
@@ -65,7 +65,7 @@ jobs:
       - name: Check production environment
         if: github.event_name != 'pull_request'
         run: |
-          node -e "const required=['MONGODB_URI','SUBMISSIONS_TOKEN','SMTP_HOST','SMTP_USER','SMTP_PASS','MAIL_TO']; const missing=required.filter((key)=>!process.env[key]); if (missing.length) { console.log('::warning title=Missing production secrets::Add these GitHub production secrets before real deployment: ' + missing.join(', ')); } else { console.log('Production environment variables are configured.'); }"
+          node -e "const required=['MONGODB_URI','SUBMISSIONS_TOKEN','SMTP_HOST','SMTP_USER','SMTP_PASS','MAIL_TO']; const missing=required.filter((key)=>!process.env[key]); if (missing.length) { console.log('::warning title=Missing production values::Add these GitHub production environment values before real deployment: ' + missing.join(', ')); } else { console.log('Production environment variables are configured.'); }"
 
       - name: Build client
         run: npm run build

@@ -14,6 +14,14 @@ Add these as production environment variables:
 CLIENT_ORIGIN=https://br.theairportlimo.com
 SUBMISSIONS_DEFAULT_LIMIT=25
 SUBMISSIONS_MAX_LIMIT=100
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=email@br.theairportlimo.com
+MAIL_FROM=BlinkRide <email@br.theairportlimo.com>
+MAIL_TO=wpadmin@techhorizon.tech
+MAIL_CC=etech.afzaal@gmail.com
+MAIL_BCC=etech.abdulrehman@gmail.com
 ```
 
 ## Environment Secrets
@@ -23,15 +31,7 @@ Add these as production environment secrets:
 ```text
 MONGODB_URI=mongodb+srv://USER:PASSWORD@HOST/blinkride?retryWrites=true&w=majority
 SUBMISSIONS_TOKEN=replace-with-a-long-random-secret
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=your-smtp-user
 SMTP_PASS=your-smtp-password
-MAIL_FROM=BlinkRide <email@br.theairportlimo.com>
-MAIL_TO=wpadmin@techhorizon.tech
-MAIL_CC=etech.afzaal@gmail.com
-MAIL_BCC=etech.abdulrehman@gmail.com
 ```
 
 Do not commit real `.env` files or secret values.

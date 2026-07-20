@@ -94,6 +94,14 @@ Use GitHub environment variables for non-secrets:
 CLIENT_ORIGIN=https://br.theairportlimo.com
 SUBMISSIONS_DEFAULT_LIMIT=25
 SUBMISSIONS_MAX_LIMIT=100
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=email@br.theairportlimo.com
+MAIL_FROM="BlinkRide <email@br.theairportlimo.com>"
+MAIL_TO=wpadmin@techhorizon.tech
+MAIL_CC=etech.afzaal@gmail.com
+MAIL_BCC=etech.abdulrehman@gmail.com
 ```
 
 Use GitHub environment secrets for private values:
@@ -101,15 +109,7 @@ Use GitHub environment secrets for private values:
 ```bash
 MONGODB_URI
 SUBMISSIONS_TOKEN
-SMTP_HOST
-SMTP_PORT
-SMTP_SECURE
-SMTP_USER
 SMTP_PASS
-MAIL_FROM
-MAIL_TO
-MAIL_CC
-MAIL_BCC
 ```
 
 ## Environment
