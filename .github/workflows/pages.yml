@@ -39,6 +39,8 @@ jobs:
         run: npm --prefix client ci
 
       - name: Build client
+        env:
+          PUBLIC_BASE_PATH: /br.theairportlimo/
         run: npm run build
 
       - name: Configure Pages

@@ -2,6 +2,8 @@
 
 This is a MERN rebuild of the WordPress site at `https://br.theairportlimo.com/`.
 
+GitHub Pages frontend: `https://ar-kahwaja.github.io/br.theairportlimo/`
+
 ## What is included
 
 - React frontend built with Rollup and Babel, with routes for Home, Services, Customers, Drivers, Affiliates, Fleet, About Us, Contact Us, and Get the App.
