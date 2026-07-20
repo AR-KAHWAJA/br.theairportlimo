@@ -20,6 +20,7 @@ async function prepareDist() {
     .replace('/src/main.jsx', `/assets/app.js?v=${buildId}`)
     .replace('/styles.css', `/styles.css?v=${buildId}`);
   await writeFile(path.join(dist, "index.html"), html);
+  await writeFile(path.join(dist, "404.html"), html);
 }
 
 async function removeUnusedPublicAssets(assetDir) {
